@@ -3,6 +3,8 @@
 # https://1000mostcommonwords.com/1000-most-common-greek-words/
 #
 
+import time
+
 from deep_translator import GoogleTranslator
 
 # === Таблицы ===
@@ -79,7 +81,7 @@ def greek_to_russian_pron(word):
 
 
 def main():
-    with open("words/food_60.txt", mode="r") as f:
+    with open("words/greek_verbs_top228_only.txt", mode="r") as f:
         greek_words = f.readlines()
 
     greek_words = [w.strip() for w in greek_words if w.strip()]
@@ -89,7 +91,8 @@ def main():
     for w in greek_words:
         pron = greek_to_russian_pron(w)
         tr = translator.translate(w)
-        print(f"{w} -> {pron} -> {tr}")
+        print('{greek: "' + w + '", pron: "' + pron + '", rus: "' + tr + '"},')
+        time.sleep(0.1)
 
 
 if __name__ == "__main__":
