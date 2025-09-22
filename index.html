@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Греческие слова</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: white;
+      color: black;
+      font-family: sans-serif;
+      user-select: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    .row {
+      width: 100%;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    #word { font-size: 20vw; font-weight: bold; }
+    #pron { font-size: 10vw; margin-top: 2vh; }
+    #rus { font-size: 10vw; margin-top: 2vh; }
+  </style>
+</head>
+<body>
+
+<div id="word" class="row"></div>
+<div id="pron" class="row"></div>
+<div id="rus" class="row"></div>
+
+<script>
+const words = [
+  {greek: "ψωμί", pron: "псомí", rus: "хлеб"},
+  {greek: "τυρί", pron: "тирí", rus: "сыр"},
+  {greek: "γάλα", pron: "гáла", rus: "молоко"},
+  {greek: "νερό", pron: "нэрó", rus: "вода"}
+];
+
+let currentWord = {};
+let stage = 0;
+
+function nextWord() {
+  currentWord = words[Math.floor(Math.random() * words.length)];
+  stage = 0;
+  document.getElementById('word').textContent = currentWord.greek;
+  document.getElementById('pron').textContent = '';
+  document.getElementById('rus').textContent = '';
+}
+
+document.body.addEventListener('click', () => {
+  if (!currentWord.greek) {
+    nextWord();
+    return;
+  }
+
+  if (stage === 0) {
+    document.getElementById('pron').textContent = currentWord.pron;
+    stage++;
+  } else if (stage === 1) {
+    document.getElementById('rus').textContent = currentWord.rus;
+    stage++;
+  } else {
+    nextWord();
+  }
+});
+</script>
+
+</body>
+</html>
