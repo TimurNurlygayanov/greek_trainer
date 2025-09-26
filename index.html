@@ -11,7 +11,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh; /* instead of fixed height */
+      height: auto;      /* allow growing */
+      overflow-y: auto;
       background-color: white;
       color: black;
       font-family: sans-serif;
